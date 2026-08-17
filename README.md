@@ -178,7 +178,7 @@ Works in all modern evergreen browsers (Chrome, Firefox, Safari, Edge). Autoplay
 
 - GitHub: https://github.com/coder-nik200
 - LinkedIn: https://www.linkedin.com/in/nitish-kumar-bharti-631a37359/
-- Portfolio: https://study-frontend-pi.vercel.app/
+- Portfolio: https://portfolio-puce-six-7fnmze2rme.vercel.app/
 
 ---
 
