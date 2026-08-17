@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # The Weeknd — After Hours
 
 A moody, full-screen "midnight broadcast" music player built with Next.js, React, and Tailwind CSS. It streams a YouTube playlist through a hidden IFrame player behind a cinematic, retro-radio interface — complete with a live clock, rotating quotes, a scanline/grain-textured backdrop, and a tap-to-record easter egg.
@@ -152,3 +153,35 @@ Works in all modern evergreen browsers (Chrome, Firefox, Safari, Edge). Autoplay
 ## License
 
 This project is provided as-is for personal/portfolio use. "The Weeknd" name and imagery are trademarks/copyrights of their respective owners; this is an unofficial fan project.
+=======
+# The Weeknd — After Hours (Tailwind edition)
+
+## Setup
+npm install
+npm run dev
+
+## Images
+- public/weeknd-wallpaper.jpeg -> shown on small/mobile screens (< md breakpoint, 768px)
+- public/weeknd-collage.jpeg -> shown on desktop screens (>= md breakpoint)
+
+## Structure
+- app/page.js — composes the page from components, mobile-first responsive classes throughout
+- app/hooks/useBroadcastPlayer.js — all YouTube IFrame API + clock/quote/glitch state logic
+- app/components/
+  - Backdrop.jsx — blurred full-bleed wash behind everything
+  - HeroImage.jsx — the clickable/tappable artwork (image swaps at md breakpoint)
+  - Overlays.jsx — Shade (vignette), Scanlines, Grain
+  - Rails.jsx — decorative vertical side text, desktop only
+  - TopLine.jsx — live clock + signal readout
+  - Header.jsx — "THE WEEKND" title block
+  - ArchiveCard.jsx — decorative desktop-only archive blurb
+  - RecordedBadge.jsx — "RECORDED AT ..." toast after tapping artwork
+  - Quote.jsx — rotating italic quote
+  - Player.jsx — artwork, progress bar, transport controls, playlist link
+  - YouTubeMount.jsx — hidden mount point for the YouTube IFrame player
+
+## Desktop changes
+- The sidebar track list ("THE ARCHIVE") has been removed on desktop — navigate with the ↶ / ↷ transport buttons instead.
+- Layout now centers a wider header + player composition, with bigger type, a decorative archive card next to the title, and side rails, instead of the old 3-column grid.
+- Mobile layout (< 768px) is unchanged.
+>>>>>>> 0eccc3b (Initial commit)

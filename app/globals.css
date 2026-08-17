@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    background: #060607;
+    color: #f6f2ed;
+  }
+  button,
+  input {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* Radial + linear vignette over the hero art */
+  .shade-desktop {
+    background:
+      radial-gradient(ellipse at 50% 44%, transparent 12%, rgba(0, 0, 0, 0.23) 48%, rgba(0, 0, 0, 0.9) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.72), transparent 29%, transparent 70%, rgba(0, 0, 0, 0.75));
+  }
+  .shade-mobile {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.03) 31%, rgba(0, 0, 0, 0.3) 52%, rgba(0, 0, 0, 0.91) 100%),
+      radial-gradient(ellipse at center, transparent 33%, rgba(0, 0, 0, 0.63) 100%);
+  }
+
+  .scanlines {
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.11) 0 1px, transparent 1px 4px);
+    mix-blend-mode: soft-light;
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    mix-blend-mode: screen;
+  }
+
+  .progress-range {
+    appearance: none;
+    background: linear-gradient(90deg, #e5dcd2 var(--played), rgba(255, 255, 255, 0.25) var(--played));
+  }
+  .progress-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f4eee6;
+  }
+
+  .rail-dot,
+  .signal-dot,
+  .now-dot,
+  .rec-dot {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background: #e21c26;
+    border-radius: 50%;
+    margin-left: 5px;
+    box-shadow: 0 0 9px #f00;
+  }
+}
