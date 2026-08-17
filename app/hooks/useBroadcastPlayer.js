@@ -1,21 +1,24 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-const PLAYLIST_ID = 'PLlWZj99fwdl88EcZDDU3ubcIYOhiUCvp-';
+const PLAYLIST_ID = process.env.NEXT_PUBLIC_PLAYLIST_ID;
 export const PLAYLIST_URL = `https://music.youtube.com/playlist?list=${PLAYLIST_ID}`;
 
 export const QUOTES = [
   "It's 2 AM. You know what to play.",
-  'Some memories sound better at night.',
-  'Press play. Forget the time.',
-  'Welcome back to the after hours.',
-  'This song knows too much.',
-  'MIDNIGHT // 2000s // HEADPHONES ON',
-  'THE NIGHT IS STILL YOUNG.'
+  "Some memories sound better at night.",
+  "Press play. Forget the time.",
+  "Welcome back to the after hours.",
+  "This song knows too much.",
+  "MIDNIGHT // 2000s // HEADPHONES ON",
+  "THE NIGHT IS STILL YOUNG.",
 ];
 
-export const formatTime = (s) => (!Number.isFinite(s) ? '0:00' : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`);
+export const formatTime = (s) =>
+  !Number.isFinite(s)
+    ? "0:00"
+    : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
 export function useBroadcastPlayer() {
   const player = useRef(null);
@@ -26,30 +29,49 @@ export function useBroadcastPlayer() {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(82);
   const [muted, setMuted] = useState(false);
-  const [clock, setClock] = useState('');
+  const [clock, setClock] = useState("");
   const [quote, setQuote] = useState(0);
   const [glitching, setGlitching] = useState(false);
   const [recorded, setRecorded] = useState(false);
   const [playlist, setPlaylist] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [track, setTrack] = useState({ title: 'Loading playlist…', author: 'The Weeknd', video_id: '' });
+  const [track, setTrack] = useState({
+    title: "Loading playlist…",
+    author: "The Weeknd",
+    video_id: "",
+  });
 
   const refreshTrack = () => {
     if (!player.current?.getVideoData) return;
     const data = player.current.getVideoData();
     const list = player.current.getPlaylist?.() || [];
     const index = player.current.getPlaylistIndex?.() ?? 0;
-    setTrack({ title: data.title || 'The Weeknd archive', author: data.author || 'The Weeknd', video_id: data.video_id || list[index] || '' });
+    setTrack({
+      title: data.title || "The Weeknd archive",
+      author: data.author || "The Weeknd",
+      video_id: data.video_id || list[index] || "",
+    });
     setPlaylist(list);
     setActiveIndex(index);
   };
 
   // Clock + rotating quote
   useEffect(() => {
-    const tick = () => setClock(new Intl.DateTimeFormat([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }).format(new Date()));
+    const tick = () =>
+      setClock(
+        new Intl.DateTimeFormat([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        }).format(new Date()),
+      );
     tick();
     const timer = setInterval(tick, 1000);
-    const messages = setInterval(() => setQuote((q) => (q + 1) % QUOTES.length), 3600);
+    const messages = setInterval(
+      () => setQuote((q) => (q + 1) % QUOTES.length),
+      3600,
+    );
     return () => {
       clearInterval(timer);
       clearInterval(messages);
@@ -60,10 +82,17 @@ export function useBroadcastPlayer() {
   useEffect(() => {
     let poll;
     const init = () => {
-      player.current = new window.YT.Player('youtube-player', {
-        height: '1',
-        width: '1',
-        playerVars: { listType: 'playlist', list: PLAYLIST_ID, playsinline: 1, rel: 0, modestbranding: 1, origin: window.location.origin },
+      player.current = new window.YT.Player("youtube-player", {
+        height: "1",
+        width: "1",
+        playerVars: {
+          listType: "playlist",
+          list: PLAYLIST_ID,
+          playsinline: 1,
+          rel: 0,
+          modestbranding: 1,
+          origin: window.location.origin,
+        },
         events: {
           onReady: (e) => {
             ready.current = true;
@@ -74,8 +103,8 @@ export function useBroadcastPlayer() {
           onStateChange: (e) => {
             setPlaying(e.data === window.YT.PlayerState.PLAYING);
             setTimeout(refreshTrack, 120);
-          }
-        }
+          },
+        },
       });
       poll = setInterval(() => {
         if (player.current?.getCurrentTime) {
@@ -88,8 +117,8 @@ export function useBroadcastPlayer() {
     if (window.YT?.Player) init();
     else {
       window.onYouTubeIframeAPIReady = init;
-      const script = document.createElement('script');
-      script.src = 'https://www.youtube.com/iframe_api';
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -133,7 +162,7 @@ export function useBroadcastPlayer() {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = 'square';
+      osc.type = "square";
       osc.frequency.setValueAtTime(670, ctx.currentTime);
       gain.gain.setValueAtTime(0.025, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.13);
@@ -166,6 +195,6 @@ export function useBroadcastPlayer() {
     changeVolume,
     toggleMute,
     pickTrack,
-    triggerGlitch
+    triggerGlitch,
   };
 }
