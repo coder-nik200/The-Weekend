@@ -1,9 +1,27 @@
-<<<<<<< HEAD
 # The Weeknd — After Hours
+
+![Banner](public/readme/weeknd-banner.jpeg)
 
 A moody, full-screen "midnight broadcast" music player built with Next.js, React, and Tailwind CSS. It streams a YouTube playlist through a hidden IFrame player behind a cinematic, retro-radio interface — complete with a live clock, rotating quotes, a scanline/grain-textured backdrop, and a tap-to-record easter egg.
 
 ![Tech](https://img.shields.io/badge/Next.js-14-black) ![Tech](https://img.shields.io/badge/React-18-61DAFB) ![Tech](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8)
+
+---
+
+## Preview
+
+<table>
+  <tr>
+    <td align="center" width="35%">
+      <img src="public/readme/weeknd-portrait.jpeg" alt="Mobile layout" width="260"/>
+      <br /><sub><b>Mobile</b> (&lt; 768px)</sub>
+    </td>
+    <td align="center" width="65%">
+      <img src="public/readme/weeknd-desktop.jpeg" alt="Desktop layout" width="520"/>
+      <br /><sub><b>Desktop</b> (&ge; 768px)</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -22,13 +40,13 @@ A moody, full-screen "midnight broadcast" music player built with Next.js, React
 
 ## Tech Stack
 
-| Layer      | Choice                                   |
-|------------|-------------------------------------------|
-| Framework  | [Next.js 14](https://nextjs.org/) (App Router) |
-| UI         | [React 18](https://react.dev/)            |
-| Styling    | [Tailwind CSS 3](https://tailwindcss.com/) |
-| Playback   | [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) |
-| Fonts      | Bebas Neue, Playfair Display, DM Mono (Google Fonts) |
+| Layer     | Choice                                                                                  |
+| --------- | --------------------------------------------------------------------------------------- |
+| Framework | [Next.js 14](https://nextjs.org/) (App Router)                                          |
+| UI        | [React 18](https://react.dev/)                                                          |
+| Styling   | [Tailwind CSS 3](https://tailwindcss.com/)                                              |
+| Playback  | [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) |
+| Fonts     | Bebas Neue, Playfair Display, DM Mono (Google Fonts)                                    |
 
 No backend, database, or API keys are required — everything runs client-side.
 
@@ -89,7 +107,11 @@ npm run start
 │       └── Player.jsx             # Artwork, progress bar, transport controls, playlist link
 ├── public/
 │   ├── weeknd-wallpaper.jpeg      # Hero/backdrop image — used below the md breakpoint (mobile)
-│   └── weeknd-collage.jpeg        # Hero/backdrop image — used at md breakpoint and up (desktop)
+│   ├── weeknd-collage.jpeg        # Hero/backdrop image — used at md breakpoint and up (desktop)
+│   └── readme/                    # Images used only in this README, not by the app itself
+│       ├── weeknd-portrait.jpeg   # Mobile preview screenshot/image
+│       ├── weeknd-banner.jpeg     # README banner
+│       └── weeknd-desktop.jpeg    # Desktop preview screenshot/image
 ├── tailwind.config.js             # Custom keyframes/animations, fonts, colors
 ├── postcss.config.js
 ├── next.config.js
@@ -105,7 +127,7 @@ npm run start
 Update the playlist ID at the top of `app/hooks/useBroadcastPlayer.js`:
 
 ```js
-const PLAYLIST_ID = 'PLlWZj99fwdl88EcZDDU3ubcIYOhiUCvp-';
+const PLAYLIST_ID = "PLlWZj99fwdl88EcZDDU3ubcIYOhiUCvp-";
 ```
 
 Any public YouTube playlist ID will work.
@@ -129,10 +151,10 @@ The layout switches between mobile and desktop compositions at Tailwind's `md` b
 
 ## Responsive Behavior
 
-| Screen size        | Layout |
-|---------------------|--------|
-| `< 768px` (mobile)   | Full-bleed portrait artwork, compact header, quote + player pinned near the bottom of the screen, no side rails or playlist |
-| `≥ 768px` (desktop)  | Full-bleed wide artwork, larger title with a decorative archive card beside it, centered wider player card, decorative side rails. Playlist sidebar is intentionally omitted — use the transport buttons to skip tracks |
+| Screen size         | Layout                                                                                                                                                                                                                  |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `< 768px` (mobile)  | Full-bleed portrait artwork, compact header, quote + player pinned near the bottom of the screen, no side rails or playlist                                                                                             |
+| `≥ 768px` (desktop) | Full-bleed wide artwork, larger title with a decorative archive card beside it, centered wider player card, decorative side rails. Playlist sidebar is intentionally omitted — use the transport buttons to skip tracks |
 
 ---
 
@@ -150,38 +172,22 @@ Works in all modern evergreen browsers (Chrome, Firefox, Safari, Edge). Autoplay
 
 ---
 
-## License
+## 👨‍💻 Author
 
-This project is provided as-is for personal/portfolio use. "The Weeknd" name and imagery are trademarks/copyrights of their respective owners; this is an unofficial fan project.
-=======
-# The Weeknd — After Hours (Tailwind edition)
+**Nitish Bharti**
 
-## Setup
-npm install
-npm run dev
+- GitHub: https://github.com/coder-nik200
+- LinkedIn: https://www.linkedin.com/in/nitish-kumar-bharti-631a37359/
+- Portfolio: https://study-frontend-pi.vercel.app/
 
-## Images
-- public/weeknd-wallpaper.jpeg -> shown on small/mobile screens (< md breakpoint, 768px)
-- public/weeknd-collage.jpeg -> shown on desktop screens (>= md breakpoint)
+---
 
-## Structure
-- app/page.js — composes the page from components, mobile-first responsive classes throughout
-- app/hooks/useBroadcastPlayer.js — all YouTube IFrame API + clock/quote/glitch state logic
-- app/components/
-  - Backdrop.jsx — blurred full-bleed wash behind everything
-  - HeroImage.jsx — the clickable/tappable artwork (image swaps at md breakpoint)
-  - Overlays.jsx — Shade (vignette), Scanlines, Grain
-  - Rails.jsx — decorative vertical side text, desktop only
-  - TopLine.jsx — live clock + signal readout
-  - Header.jsx — "THE WEEKND" title block
-  - ArchiveCard.jsx — decorative desktop-only archive blurb
-  - RecordedBadge.jsx — "RECORDED AT ..." toast after tapping artwork
-  - Quote.jsx — rotating italic quote
-  - Player.jsx — artwork, progress bar, transport controls, playlist link
-  - YouTubeMount.jsx — hidden mount point for the YouTube IFrame player
+## 📄 License
 
-## Desktop changes
-- The sidebar track list ("THE ARCHIVE") has been removed on desktop — navigate with the ↶ / ↷ transport buttons instead.
-- Layout now centers a wider header + player composition, with bigger type, a decorative archive card next to the title, and side rails, instead of the old 3-column grid.
-- Mobile layout (< 768px) is unchanged.
->>>>>>> 0eccc3b (Initial commit)
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
