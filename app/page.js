@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useBroadcastPlayer, QUOTES } from './hooks/useBroadcastPlayer';
-import YouTubeMount from './components/YouTubeMount';
-import Backdrop from './components/Backdrop';
-import HeroImage from './components/HeroImage';
-import { Shade, Scanlines, Grain } from './components/Overlays';
-import { LeftRail, RightRail } from './components/Rails';
-import TopLine from './components/TopLine';
-import Header from './components/Header';
-import ArchiveCard from './components/ArchiveCard';
-import RecordedBadge from './components/RecordedBadge';
-import Quote from './components/Quote';
-import Player from './components/Player';
+import { useBroadcastPlayer, QUOTES } from "./hooks/useBroadcastPlayer";
+import YouTubeMount from "./components/YouTubeMount";
+import Backdrop from "./components/Backdrop";
+import HeroImage from "./components/HeroImage";
+import { Shade, Scanlines, Grain } from "./components/Overlays";
+import { LeftRail, RightRail } from "./components/Rails";
+import TopLine from "./components/TopLine";
+import Header from "./components/Header";
+import ArchiveCard from "./components/ArchiveCard";
+import RecordedBadge from "./components/RecordedBadge";
+import Quote from "./components/Quote";
+import Player from "./components/Player";
 
 export default function Home() {
   const {
@@ -20,6 +20,7 @@ export default function Home() {
     duration,
     volume,
     muted,
+    shuffle,
     clock,
     quote,
     glitching,
@@ -30,14 +31,17 @@ export default function Home() {
     playPause,
     previousVideo,
     nextVideo,
+    toggleShuffle,
     seek,
     changeVolume,
     toggleMute,
-    triggerGlitch
+    triggerGlitch,
   } = useBroadcastPlayer();
 
   return (
-    <main className={`relative isolate overflow-hidden bg-[#070707] min-h-[100svh] h-[100svh] md:h-auto md:min-h-screen font-mono ${glitching ? 'animate-flicker' : ''}`}>
+    <main
+      className={`relative isolate overflow-hidden bg-[#070707] min-h-[100svh] h-[100svh] md:h-auto md:min-h-screen font-mono ${glitching ? "animate-flicker" : ""}`}
+    >
       <YouTubeMount />
 
       <Backdrop />
@@ -73,12 +77,14 @@ export default function Home() {
             duration={duration}
             volume={volume}
             muted={muted}
+            shuffle={shuffle}
             playlist={playlist}
             activeIndex={activeIndex}
             track={track}
             playPause={playPause}
             previousVideo={previousVideo}
             nextVideo={nextVideo}
+            toggleShuffle={toggleShuffle}
             seek={seek}
             changeVolume={changeVolume}
             toggleMute={toggleMute}

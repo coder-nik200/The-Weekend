@@ -29,6 +29,7 @@ export function useBroadcastPlayer() {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(82);
   const [muted, setMuted] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
   const [clock, setClock] = useState("");
   const [quote, setQuote] = useState(0);
   const [glitching, setGlitching] = useState(false);
@@ -98,6 +99,7 @@ export function useBroadcastPlayer() {
             ready.current = true;
             e.target.setVolume(82);
             e.target.setLoop(true);
+            e.target.setShuffle(false);
             setTimeout(refreshTrack, 800);
           },
           onStateChange: (e) => {
@@ -131,6 +133,17 @@ export function useBroadcastPlayer() {
   };
   const previousVideo = () => player.current?.previousVideo();
   const nextVideo = () => player.current?.nextVideo();
+  const toggleShuffle = () => {
+    if (!ready.current) return;
+
+    const nextShuffle = !shuffle;
+    player.current.setShuffle(nextShuffle);
+    setShuffle(nextShuffle);
+
+    if (nextShuffle) {
+      player.current.nextVideo();
+    }
+  };
   const seek = (value) => {
     setCurrent(value);
     player.current?.seekTo(value, true);
@@ -181,6 +194,7 @@ export function useBroadcastPlayer() {
     duration,
     volume,
     muted,
+    shuffle,
     clock,
     quote,
     glitching,
@@ -191,6 +205,7 @@ export function useBroadcastPlayer() {
     playPause,
     previousVideo,
     nextVideo,
+    toggleShuffle,
     seek,
     changeVolume,
     toggleMute,
